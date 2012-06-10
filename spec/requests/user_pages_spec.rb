@@ -8,7 +8,7 @@ describe "User pages" do
     before { visit signup_path }
 
     it { should have_selector('h1',    text: 'Sign up') }
-    it { should have_selector('title', text: full_title('Sign up')) }
+    it { should have_title(full_title('Sign up')) }
   end
 
   describe "signup" do
@@ -24,7 +24,7 @@ describe "User pages" do
       describe "error messages" do
         before { click_button submit }
 
-        it { should have_selector('title', text: 'Sign up' ) }
+        it { should have_title('Sign up' ) }
         it { should have_content('error') }
         it { should have_content("Password can't be blank") }
         it { should have_content("Name can't be blank") }
@@ -51,7 +51,7 @@ describe "User pages" do
         before { click_button submit }
         let(:user) { User.find_by_email('user@example.com') }
 
-        it { should have_selector('title', test: user.name) }
+        it { should have_title(user.name) }
         it { should have_selector('div.alert.alert-success', text: 'Welcome') }
         it { should have_link('Sign out') }
       end
@@ -63,6 +63,6 @@ describe "User pages" do
     before { visit user_path(user) }
 
     it { should have_selector('h1',    text: user.name) }
-    it { should have_selector('title', text: user.name) }
+    it { should have_title(user.name) }
   end
 end
